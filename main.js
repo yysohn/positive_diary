@@ -10,6 +10,22 @@ function saveHandler(){
     let date = $("#date").val();
     let text = $("#text").val();
     let mood = $("#mood").val();
+    
+    //예외처리
+    if (date == "") {
+        alert ("날짜를 선택하세요")
+        return false
+    }
+    if (mood == "") {
+        alert ("감정을 선택하세요")
+        return false
+    }
+    if ( text == "") {
+        alert ("긍정확언을 입력하세요")
+        return false
+    }
+   
+    
     //입력한 값을 한문장으로 만들기
     diary = `<p>${date}: ${text} - ${mood}</p>`+ diary
     //console.log(diary)
@@ -20,7 +36,10 @@ function saveHandler(){
     //let storage1 = localStorage.getItem("diary");
     //console.log(storage1)
 
-
+    $("#date").val("")
+    $("#text").val("")
+    $("#mood").val("")
+    
 }
 //스토리지 테스트
 //localStorage.setItem("test-key", "테스트입니다");
@@ -28,8 +47,13 @@ function saveHandler(){
 // jquery 실행 시작
 $(document).ready(function() {
     //문서가 로딩되면 로컬 저장소에 있는 긍정확언 불러오시
+    
     //diary = localStorage.setItem("diary");
-
+    
+    if (diary == null) {
+        diary = " ";
+    }
+    
     //id가 save로 정의한 정의한 요소를 클릭했을때 
     $("#save").click(saveHandler)
 })
